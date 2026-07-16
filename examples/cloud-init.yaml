@@ -1,0 +1,28 @@
+#cloud-config
+hostname: linux-vm-01
+fqdn: linux-vm-01.corp.example.com
+manage_etc_hosts: false
+
+users:
+  - name: example-admin
+    groups: [sudo]
+    shell: /bin/bash
+    sudo:
+      - "ALL=(ALL:ALL) ALL"
+    ssh_authorized_keys:
+      - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEXAMPLE_REPLACE_WITH_REAL_PUBLIC_KEY example-admin"
+
+ssh_pwauth: false
+disable_root: true
+package_update: true
+package_upgrade: false
+
+packages:
+  - chrony
+  - curl
+  - ca-certificates
+
+runcmd:
+  - [systemctl, enable, --now, chrony]
+
+final_message: "Initial Linux VM configuration completed."
