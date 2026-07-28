@@ -36,7 +36,7 @@ packages:
   - openssh-server
 
 write_files:
-  - path: /etc/issue.d/example-project
+  - path: /etc/issue.d/example-project.issue
     permissions: "0644"
     content: |
       Example Infrastructure Project
