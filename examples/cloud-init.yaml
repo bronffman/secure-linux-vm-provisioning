@@ -1,19 +1,22 @@
 #cloud-config
+# Documentation-only example. Replace the placeholder SSH key.
 hostname: linux-vm-01
 fqdn: linux-vm-01.corp.example.com
 manage_etc_hosts: false
 
 users:
   - name: example-admin
-    groups: [sudo]
+    groups:
+      - sudo
     shell: /bin/bash
     sudo:
       - "ALL=(ALL:ALL) ALL"
     ssh_authorized_keys:
-      - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEXAMPLE_REPLACE_WITH_REAL_PUBLIC_KEY example-admin"
+      - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEXAMPLE_REPLACE_WITH_A_REAL_PUBLIC_KEY example-admin"
 
 ssh_pwauth: false
 disable_root: true
+
 package_update: true
 package_upgrade: false
 
@@ -22,7 +25,15 @@ packages:
   - curl
   - ca-certificates
 
+write_files:
+  - path: /etc/issue.d/example-project
+    permissions: "0644"
+    content: |
+      Example Infrastructure Project
+      Managed configuration. Local changes may be overwritten.
+
 runcmd:
   - [systemctl, enable, --now, chrony]
+  - [systemctl, enable, --now, ssh]
 
-final_message: "Initial Linux VM configuration completed."
+final_message: "Initial cloud-init configuration completed."
