@@ -1,18 +1,27 @@
 #cloud-config
-# Documentation-only example. Replace the placeholder SSH key.
+
+# Example cloud-init configuration for an Ubuntu-based VM.
+# Replace the placeholder SSH key before use.
+# Do not store passwords, tokens, or private keys in this file.
+
 hostname: linux-vm-01
 fqdn: linux-vm-01.corp.example.com
 manage_etc_hosts: false
 
 users:
-  - name: example-admin
+  - name: bootstrap-admin
     groups:
       - sudo
     shell: /bin/bash
+    lock_passwd: true
+
+    # Bootstrap access only.
+    # Restrict or remove this rule after configuration management is applied.
     sudo:
-      - "ALL=(ALL:ALL) ALL"
+      - "ALL=(ALL:ALL) NOPASSWD: ALL"
+
     ssh_authorized_keys:
-      - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEXAMPLE_REPLACE_WITH_A_REAL_PUBLIC_KEY example-admin"
+      - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEXAMPLE_REPLACE_WITH_REAL_PUBLIC_KEY bootstrap-admin"
 
 ssh_pwauth: false
 disable_root: true
@@ -24,13 +33,15 @@ packages:
   - chrony
   - curl
   - ca-certificates
+  - openssh-server
 
 write_files:
   - path: /etc/issue.d/example-project
     permissions: "0644"
     content: |
       Example Infrastructure Project
-      Managed configuration. Local changes may be overwritten.
+      This system is managed through configuration management.
+      Local changes may be overwritten.
 
 runcmd:
   - [systemctl, enable, --now, chrony]
