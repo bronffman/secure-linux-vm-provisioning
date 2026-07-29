@@ -16,7 +16,7 @@
 
 Это не готовая production-инструкция. Перед применением ее необходимо адаптировать под конкретные версии ОС, гипервизор, сеть, Active Directory, monitoring, backup и требования безопасности.
 
-## Общая последовательность
+## General sequence
 
 ```mermaid
 flowchart LR
@@ -29,8 +29,6 @@ flowchart LR
     F --> G[Monitoring, Backup, CMDB]
     G --> H[Передача владельцу]
 ```
-
-## Что дает каждый этап
 
 ### 1. Preparation
 
