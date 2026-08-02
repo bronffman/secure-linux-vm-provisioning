@@ -105,7 +105,7 @@ netplan status --all
 
 При удаленном изменении сети должен быть доступ к web-консоли гипервизора.
 
-## 6. Сеть для RHEL-совместимых ОС
+## 6. Networking for RHEL-compatible OS
 
 Для современных RHEL-подобных систем использовать NetworkManager:
 
@@ -124,7 +124,7 @@ sudo bash ../examples/rhel-network-nmcli.sh
 
 Legacy-файлы `ifcfg-*` и каталог `network-scripts` не должны быть основным способом настройки новых систем.
 
-## 7. Время и DNS
+## 7. Time and DNS
 
 ```bash
 timedatectl
@@ -134,7 +134,7 @@ getent hosts linux-vm-01.corp.example.com
 
 Корректные DNS и время обязательны для Kerberos и доменной аутентификации.
 
-## 8. Обновления
+## 8. Updates
 
 Ubuntu:
 
