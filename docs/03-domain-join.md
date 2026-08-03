@@ -48,7 +48,7 @@ timedatectl
 getent hosts corp.example.com
 ```
 
-## Подготовка объекта в AD
+## Preparing an object in AD
 
 Объект компьютера может создаваться заранее, если:
 
@@ -88,7 +88,7 @@ id 'user@corp.example.com'
 sssctl domain-status corp.example.com
 ```
 
-## RHEL-совместимая система: realmd + SSSD
+## RHEL-compatible system: realmd + SSSD
 
 ```bash
 sudo dnf install realmd sssd adcli oddjob oddjob-mkhomedir krb5-workstation
