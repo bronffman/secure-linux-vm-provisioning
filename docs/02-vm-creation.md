@@ -159,7 +159,7 @@ sudo systemctl reboot
 
 Legacy-команда `init 6` в новой инструкции не используется.
 
-## 9. Базовая безопасность
+## 9. Basic security
 
 Минимальный набор:
 
@@ -187,7 +187,7 @@ sudo visudo -f /etc/sudoers.d/linux-admins
 sudo visudo -c
 ```
 
-## 10. Дополнительные диски
+## 10. Additional disks
 
 Для каждого диска определить:
 
@@ -222,7 +222,7 @@ systemctl is-enabled monitoring-agent
 
 Snapshot VM не является полноценным backup.
 
-## 12. Приемочные проверки
+## 12. Acceptance checks
 
 ```bash
 hostnamectl
