@@ -106,7 +106,7 @@ sssctl domain-status corp.example.com
 
 Для новых систем не использовать старый `authconfig`.
 
-## Ограничение доступа
+## Access restriction
 
 Не следует автоматически разрешать вход всем пользователям домена.
 
@@ -130,7 +130,7 @@ sudo realm permit -g 'linux-admins@corp.example.com'
 
 Решение зависит от версии ОС, SSSD-конфигурации и внутренней политики. PAM не следует менять вручную без проверки документации конкретной версии ОС.
 
-## Winbind-вариант
+## Winbind-option
 
 Если архитектура требует Samba Winbind:
 
