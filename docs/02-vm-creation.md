@@ -245,7 +245,7 @@ journalctl -p err -b --no-pager
 - отсутствие failed services;
 - отсутствие критических ошибок.
 
-## 13. Результат этапа
+## 13. РStage result
 
 VM готова, когда:
 
