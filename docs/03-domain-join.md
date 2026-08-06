@@ -124,7 +124,7 @@ sudo realm permit -g 'linux-admins@corp.example.com'
 - проверить аварийный доступ;
 - протестировать вход отдельным пользователем.
 
-## Домашние каталоги
+## Home directories
 
 Автоматическое создание home directory включается только при необходимости.
 
@@ -149,7 +149,7 @@ net ads info
 wbinfo --online-status
 ```
 
-## Проверка входа
+## Login verification
 
 ```bash
 id 'user@corp.example.com'
@@ -166,7 +166,7 @@ getent passwd 'user@corp.example.com'
 - работу SSH;
 - правильную обработку групп.
 
-## Sudo для доменной группы
+## Sudo for domain group
 
 ```sudoers
 %linux-admins@corp.example.com ALL=(ALL:ALL) ALL
@@ -183,7 +183,7 @@ sudo visudo -c
 
 `NOPASSWD: ALL` не используется без отдельного обоснования.
 
-## Откат
+## Rollback
 
 При неудачном вводе в домен:
 
@@ -232,7 +232,7 @@ journalctl -u sshd --since -30min
 
 Также проверить access policy и SSH-конфигурацию.
 
-## Результат этапа
+## Stage result
 
 Ввод в домен завершен, когда:
 
