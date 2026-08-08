@@ -36,7 +36,28 @@
 
 После создания нужно проверить доступ Linux Operations к консоли VM.
 
-## 3. First launch
+## 3. Initial configuration with cloud-init
+
+Для первоначальной конфигурации Ubuntu VM может использоваться `cloud-init`.
+
+Конфигурация должна быть подготовлена и передана виртуальной машине **до первого запуска**, поскольку `cloud-init` выполняет основные действия во время первоначальной загрузки системы.
+
+- [`../examples/cloud-init.yaml`](../examples/cloud-init.yaml)
+
+- настройку hostname и FQDN;
+- создание временной bootstrap-учетной записи;
+- настройку SSH-доступа по публичному ключу;
+- отключение парольной SSH-аутентификации;
+- запрет прямого входа под `root`;
+- установку базовых пакетов;
+- запуск `chrony` и SSH;
+- создание информационного system banner.
+
+> Перед использованием необходимо заменить тестовый SSH-ключ и адаптировать параметры под целевую инфраструктуру. Пароли, токены и приватные ключи не должны храниться в `cloud-init.yaml`.
+
+Если `cloud-init` не используется, соответствующие параметры настраиваются вручную на следующих этапах.
+
+## 4. First launch
 
 ```bash
 cat /etc/os-release
@@ -44,7 +65,7 @@ uname -r
 systemctl --failed
 ```
 
-## 4. Hostname
+## 5. Hostname
 
 ```bash
 sudo hostnamectl set-hostname linux-vm-01.corp.example.com
@@ -56,7 +77,7 @@ hostname --fqdn
 
 `/etc/hosts` не должен использоваться как замена корректному DNS.
 
-## 5. Networking for Ubuntu
+## 6. Networking for Ubuntu
 
 Сначала определить имя интерфейса:
 
@@ -103,7 +124,7 @@ netplan status --all
 
 При удаленном изменении сети должен быть доступ к web-консоли гипервизора.
 
-## 6. Networking for RHEL-compatible OS
+## 7. Networking for RHEL-compatible OS
 
 Для современных RHEL-подобных систем использовать NetworkManager:
 
@@ -124,7 +145,7 @@ sudo bash ../examples/rhel-network-nmcli.sh
 
 Legacy-файлы `ifcfg-*` и каталог `network-scripts` не должны быть основным способом настройки новых систем.
 
-## 7. Time and DNS
+## 8. Time and DNS
 
 ```bash
 timedatectl
@@ -134,7 +155,7 @@ getent hosts linux-vm-01.corp.example.com
 
 Корректные DNS и время обязательны для Kerberos и доменной аутентификации.
 
-## 8. Updates
+## 9. Updates
 
 Ubuntu:
 
@@ -159,7 +180,7 @@ sudo systemctl reboot
 
 Legacy-команда `init 6` в новой инструкции не используется.
 
-## 9. Basic security
+## 10. Basic security
 
 Минимальный набор:
 
@@ -187,7 +208,7 @@ sudo visudo -f /etc/sudoers.d/linux-admins
 sudo visudo -c
 ```
 
-## 10. Additional disks
+## 11. Additional disks
 
 Для каждого диска определить:
 
@@ -207,7 +228,7 @@ lsblk
 blkid
 ```
 
-## 11. Monitoring и backup
+## 12. Monitoring и backup
 
 После установки monitoring-agent проверить:
 
@@ -222,7 +243,7 @@ systemctl is-enabled monitoring-agent
 
 Snapshot VM не является полноценным backup.
 
-## 12. Acceptance checks
+## 13. Acceptance checks
 
 ```bash
 hostnamectl
@@ -245,7 +266,7 @@ journalctl -p err -b --no-pager
 - отсутствие failed services;
 - отсутствие критических ошибок.
 
-## 13. Stage result
+## 14. Stage result
 
 VM готова, когда:
 
