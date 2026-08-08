@@ -42,7 +42,7 @@
 
 Конфигурация должна быть подготовлена и передана виртуальной машине **до первого запуска**, поскольку `cloud-init` выполняет основные действия во время первоначальной загрузки системы.
 
-- [`../examples/cloud-init.yaml`](../examples/cloud-init.yaml)
+ [`../examples/cloud-init.yaml`](../examples/cloud-init.yaml)
 
 - настройку hostname и FQDN;
 - создание временной bootstrap-учетной записи;
