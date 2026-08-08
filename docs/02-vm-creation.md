@@ -113,7 +113,9 @@ nmcli connection show
 ```
 
 Пример:
+- [`../examples/rhel-network-nmcli.sh`](../examples/rhel-network-nmcli.sh)
 
+Пример запуска:
 ```bash
 sudo bash ../examples/rhel-network-nmcli.sh
 ```
